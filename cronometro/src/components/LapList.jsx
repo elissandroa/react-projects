@@ -1,14 +1,19 @@
 import './Timer.css';
 import React from 'react'
 
-const LapList = () => {
+const LapList = ({ laps }) => {
   return (
     <div className='timer-laps'>
-        <h3>Voltas:</h3>
-        <ul>
-            <li>Volta 1: 01:05:125 </li>
-            <li>Volta 2: 02:05:125 </li>
-        </ul>
+      {laps.length > 0 && <h3>Voltas:</h3>}
+      <ul>
+        {
+          laps && laps.map((lap, index) => (
+            <li key={index}>
+            Volta {index + 1}: {lap}
+            </li>
+          ))
+        }
+      </ul>
     </div>
   )
 }
