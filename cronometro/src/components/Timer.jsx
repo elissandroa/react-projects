@@ -1,4 +1,5 @@
 import React from 'react'
+import './Timer.css';
 import TimerDisplay from './TimerDisplay'
 import TimerControls from './TimerControls'
 import LapList from './LapList'

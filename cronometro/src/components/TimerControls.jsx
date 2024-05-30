@@ -1,8 +1,12 @@
+import './Timer.css';
 import React from 'react'
 
 const TimerControls = () => {
   return (
-    <div>TimerControls</div>
+    <div className='timer-controls'>
+        <button>Iniciar</button>
+        <button>Zerar</button>
+    </div>
   )
 }
 
