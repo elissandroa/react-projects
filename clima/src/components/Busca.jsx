@@ -2,7 +2,7 @@
 const Busca = ({cidade, setCidade, buscarClima}) => {
   return (
     <div>
-        <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} placeholder="Digite uma cidade"/>
+        <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} placeholder="Digite uma cidade" required/>
         <button onClick={buscarClima}>Buscar</button>
     </div>
   )

@@ -16,9 +16,18 @@ function App() {
   const [previsao, setPrevisao] = useState([]);
 
   const buscarClima = async () => {
+    if(!cidade){
+      return;
+    }
     try {
-      const respostaClima = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}`)
+      const respostaClima = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`
+
+      );
+      const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`
+
+      );
       setClima(respostaClima.data);
+      setPrevisao(respostaPrevisao.data.list.slice(0,5));
     } catch (error) {
       console.log("Erro ao buscar clima: ", error);
     }
@@ -28,8 +37,8 @@ function App() {
     <div>
       <Titulo>Condições climáticas</Titulo>
       <Busca cidade={cidade} setCidade={setCidade} buscarClima={buscarClima} />
-      <ClimaAtual />
-      <Previsao />
+      {clima && <ClimaAtual clima={clima} />}
+      {previsao.length > 0 && <Previsao previsoes={previsao} />}
     </div>
   );
 }
