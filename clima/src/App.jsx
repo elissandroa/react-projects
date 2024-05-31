@@ -10,13 +10,29 @@ import { Titulo } from "./AppStyled.js";
 
 const apiKey = import.meta.env.VITE_API_KEY || "";
 
+
 function App() {
   const [cidade, setCidade] = useState("");
   const [clima, setClima] = useState(null);
   const [previsao, setPrevisao] = useState([]);
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const resposta = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`);
+      setCidade(resposta.data.name);
+      setClima(resposta.data);
+
+      const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`);
+      setPrevisao(respostaPrevisao.data.list.slice(0, 5));
+    })
+  }, [apiKey]);
+
+
   const buscarClima = async () => {
-    if(!cidade){
+    if (!cidade) {
       return;
     }
     try {
@@ -24,10 +40,11 @@ function App() {
 
       );
       const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`
-
       );
+
+   
       setClima(respostaClima.data);
-      setPrevisao(respostaPrevisao.data.list.slice(0,5));
+      setPrevisao(respostaPrevisao.data.list.slice(0, 5));
     } catch (error) {
       console.log("Erro ao buscar clima: ", error);
     }
