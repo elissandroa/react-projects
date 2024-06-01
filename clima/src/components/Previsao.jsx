@@ -1,7 +1,8 @@
+import { PrevisaoContainer } from "./PrevisaoStyles"
 
 const Previsao = ({ previsoes }) => {
   return (
-    <div>
+    <PrevisaoContainer>
       <h4>Previsão para as próximas horas</h4>
       <ul>
         {
@@ -12,7 +13,7 @@ const Previsao = ({ previsoes }) => {
             </li>     
         ))}
       </ul>
-    </div>
+    </PrevisaoContainer>
   )
 }
 

@@ -1,4 +1,4 @@
-import "./AppStyled.js";
+import "./AppStyles.js";
 
 import { useEffect, useState } from "react";
 import axios from 'axios';
@@ -6,7 +6,7 @@ import axios from 'axios';
 import Busca from "./components/Busca.jsx";
 import ClimaAtual from "./components/ClimaAtual.jsx";
 import Previsao from "./components/Previsao.jsx";
-import { Titulo } from "./AppStyled.js";
+import { ClimaContainer, Titulo } from "./AppStyles.js";
 
 const apiKey = import.meta.env.VITE_API_KEY || "";
 
@@ -51,12 +51,12 @@ function App() {
   }
 
   return (
-    <div>
+    <ClimaContainer>
       <Titulo>Condições climáticas</Titulo>
       <Busca cidade={cidade} setCidade={setCidade} buscarClima={buscarClima} />
       {clima && <ClimaAtual clima={clima} />}
       {previsao.length > 0 && <Previsao previsoes={previsao} />}
-    </div>
+    </ClimaContainer>
   );
 }
 
