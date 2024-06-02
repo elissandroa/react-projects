@@ -28,7 +28,7 @@ function App() {
       const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`);
       setPrevisao(respostaPrevisao.data.list.slice(0, 5));
     })
-  }, [apiKey]);
+  }, []);
 
 
   const buscarClima = async () => {
