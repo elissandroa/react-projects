@@ -1,4 +1,3 @@
-import './FotoAmpliada.css';
 
 const FotoAmpliada = () => {
   return (
