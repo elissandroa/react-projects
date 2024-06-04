@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Citacao from "./components/Citacao";
 import citacoes from "./data";
 
@@ -6,7 +6,8 @@ function App() {
 const [indice, setIndice] = useState(0); 
 
 const proximaCitacao = () => {
-  setIndice((indiceAtual) => (indiceAtual + 1 % citacoes.length))
+  
+  setIndice((indiceAtual) => ((indiceAtual + 1) % indiceAtual.length));
 }
 
   return (
