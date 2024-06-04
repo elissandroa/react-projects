@@ -7,12 +7,12 @@ const [indice, setIndice] = useState(0);
 
 const proximaCitacao = () => {
   
-  setIndice((indiceAtual) => ((indiceAtual + 1) % indiceAtual.length));
+  setIndice((indiceAtual) => ((indiceAtual + 1) % citacoes.length));
 }
 
   return (
     <div className="container mt-5">
-      <p>{citacoes[indice].texto}</p>
+      <Citacao texto={citacoes[indice].texto} autor={citacoes[indice].autor} />
       <button className="btn btn-success mt-2" onClick={proximaCitacao}>Próxima citação</button>
     </div>
   );
