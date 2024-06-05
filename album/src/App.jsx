@@ -18,12 +18,11 @@ function App() {
     const response = await axios.get("https://api.unsplash.com/photos/random", {
       params: {
         client_id: apiKey,
-        count: 10,
+        count: 12,
       },
     });
     setFotos(response.data);
-    console.log(response.data);
-    console.log(fotos);
+    
   }
 
   useEffect(() => {
