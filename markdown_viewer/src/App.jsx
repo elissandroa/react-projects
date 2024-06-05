@@ -4,15 +4,19 @@ import { marked } from "marked";
 
 
 function App() {
-  const [text, setText] = useState("# Olá eu sou feito com markdown");
+  const [text, setText] = useState(localStorage.getItem("markdownText") || "# Olá eu sou feito com markdown");
   const textAreaRef = useRef(null);
 
   const renderText = () => {
     return {__html: marked(text)}
   }
 
+  useEffect(() => {
+    localStorage.setItem("markdownText",text);
+  },[text])
+
   return (
-    <div className="container">
+    <div className="app-container">
       <Toolbar />
       <textarea
         ref={textAreaRef}
