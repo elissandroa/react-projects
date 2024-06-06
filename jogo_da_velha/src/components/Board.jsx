@@ -4,12 +4,33 @@ import { Square } from './Square'
 export const Board = () => {
     const [square, setSquare] = useState(Array(9).fill(null));
     const [isNext, setIsNext] = useState(true);
-    const winner = false;
-    
+    const winner = calculateWinner(square);
+    const [aiIsThink, setAiIsThink] = useState(false);
+
     const handleClick = (i) => {
-       setSquare(square[i]);
+        if (square[i] || winner || aiIsThink) return;
+
+        const newSquares = square.slice();
+        newSquares[i] = isNext ? "X" : "O";
+        setSquare(newSquares);
+        setIsNext(!isNext);
     }
 
+    const resetGame = () => {
+        setSquare(Array(9).fill(null));
+        setIsNext(true);
+    }
+
+    useEffect(() => {
+        if (!isNext && !winner) {
+            setAiIsThink(true);
+
+            setTimeout(() => {
+                aiMove(square, setSquare, setIsNext);
+                setAiIsThink(false);
+            }, 1000)
+        }
+    }, [isNext, square, winner]);
 
     return (
 
@@ -35,7 +56,46 @@ export const Board = () => {
                 <Square value={square[7]} onClick={() => handleClick(7)} />
                 <Square value={square[8]} onClick={() => handleClick(8)} />
             </div>
-            <button className='reset-button'>Reiniciar jogo</button>
+            <button className='reset-button' onClick={resetGame}>Reiniciar jogo</button>
         </div>
     )
+};
+
+
+const calculateWinner = (squares) => {
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ];
+
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] === squares[b] && squares[a] === squares[c]) {
+            return squares[a];
+
+        }
+    }
+    return null;
+}
+
+const aiMove = (square, setSquare, setIsNext) => {
+    let move = null;
+    let indice = null;
+
+    while (!move) {
+        indice = Math.floor(Math.random() * square.length);
+        if (!square[indice]) {
+            move = indice;
+            const newSquares = square.slice();
+            newSquares[move] = "O";
+            setSquare(newSquares);
+            setIsNext(true);
+        }
+    }
 }
