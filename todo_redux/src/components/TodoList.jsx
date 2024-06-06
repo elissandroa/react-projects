@@ -1,21 +1,22 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
 
 export const TodoList = () => {
-  return (
-    <div>
-        <button>Todas</button>
-        <button>Completas</button>
-        <button>Incompetas</button>
-        <ul>
-            <li>
-                <span>Algum texto tarefa</span>
-                <button>Remover</button>
-            </li>
-            <li>
-                <span className='line-through'>Algum texto tarefa</span>
-                <button>Remover</button>
-            </li>
-        </ul>
-    </div>
-  )
+    const { list, filter } = useSelector((state) => state.todos);
+    return (
+        <div>
+            <button>Todas</button>
+            <button>Completas</button>
+            <button>Incompetas</button>
+            <ul>
+                {list.map((todo) => (
+                    <li>
+                        <span>{todo.text}</span>
+                        <button>Remover</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
 }
