@@ -9,7 +9,7 @@ export const AddTodo = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(inputText.trim() === "") return;
+        if (inputText.trim() === "") return;
         dispatch(addTodo(inputText));
         setInputText("");
     }
