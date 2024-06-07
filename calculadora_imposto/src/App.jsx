@@ -7,16 +7,20 @@ function App() {
 
   const [taxData, setTaxData] = useState(null);
 
+  const calculateTax = (value) => {
+    console.log(value);
+  }
+
   return (
     <div>
-      <Container>
+      <Container style={{ width: "800px", margin: "0 auto" }}>
         <Typography
           variant="h3"
           align="center"
           style={{ marginBottom: "16px" }}>
           Calculadora de Impostos
         </Typography>
-        <TaxForm style={{ width: "800px", margin: "0 auto" }} />
+        <TaxForm onSubmit={calculateTax} />
         {taxData && <TaxReport />}
       </Container>
 
