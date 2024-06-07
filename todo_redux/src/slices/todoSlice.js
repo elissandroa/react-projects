@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
 
 export const todoSlice = createSlice({
     name: "todos",
     initialState: {
-        list: JSON.parse(localStorage.getItem("to-dos")),
+        list: JSON.parse(localStorage.getItem("to-dos")) || [],
         filter: "all",
     }, reducers: {
         addTodo: (state, action) => {
