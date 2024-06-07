@@ -9,12 +9,25 @@ export const GeneratePDF = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const generatePDF = () => {
+  const [fontSize, setFontSize]= useState("12");
+  const [fontColor, setFontColor] = useState("#000");
+  const [isBold, setIsBold] = useState(false);
+
+  const generatePdf = () => {
+    const customStyle = {
+      fontSize: parseInt(fontSize),
+      color: fontColor,
+      bold: isBold,
+    };
+
     const documentDefinition = {
         content: [
-            {text: `Titulo: ${title}`},
-            {text: `Description: ${description}`}
+            {text: `Titulo: ${title}`, style: "customStyle"},
+            {text: `Description: ${description}`, style: "customStyle"}
         ],
+        styles: {
+          customStyle: customStyle
+        },
        
     };
 
@@ -31,9 +44,16 @@ export const GeneratePDF = () => {
         Descrição:
         <input type="text" className="input" value={description} onChange={(e) => setDescription(e.target.value)}/>
       </label>
-      <TextStyleConfig />
+      <TextStyleConfig 
+        fontSize={fontSize}
+        setFontSize={setFontSize}
+        fontColor={fontColor}
+        setFontColor={setFontColor}
+        isBold={isBold}
+        setIsBold={setIsBold}
+      />
       <ImageUpload />
-      <button className="button" onClick={generatePDF}>Gerar PDF</button>
+      <button className="button" onClick={generatePdf}>Gerar PDF</button>
     </div>
   );
 };
