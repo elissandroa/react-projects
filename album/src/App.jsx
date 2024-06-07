@@ -40,10 +40,7 @@ const App = () => {
       },
     });
     setFotos(response.data);
-<<<<<<< HEAD
-=======
     
->>>>>>> 735c8bbc539e0d7bfa8f3f0dc8cd527e199980ba
   }
 
   useEffect(() => {
