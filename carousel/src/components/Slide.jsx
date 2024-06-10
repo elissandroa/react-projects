@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const Slide = () => {
+export const Slide = ({url, isActive}) => {
   return (
-    <div>Slide</div>
+    <div className={isActive ? 'slide active' : 'slide'}>
+        <img src={url} />
+    </div>
   )
 }
