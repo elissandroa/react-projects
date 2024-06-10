@@ -2,6 +2,12 @@ import React from 'react'
 
 export const TableHeader = () => {
   return (
-    <div>TableHeader</div>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Cargo</th>
+        </tr>
+    </thead>
   )
 }

@@ -1,7 +1,11 @@
 import React from 'react'
 
-export const TableRow = () => {
-  return (
-    <div>TableRow</div>
-  )
+export const TableRow = ({ row }) => {
+    return (
+        <tr>
+            <td>{row.nome}</td>
+            <td>{row.idade}</td>
+            <td>{row.cargo}</td>
+        </tr>
+    )
 }
