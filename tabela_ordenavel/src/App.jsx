@@ -14,6 +14,34 @@ function App() {
   ]);
 
   const [searchTerm, setSearchTerm] = useState(null);
+  const [sortConfig, setSortConfig] = useState("");
+
+  const sortedData = [...data].sort((a, b) => {
+    if (sortConfig != null) {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return sortConfig.direction === "ascending" ? -1 : 1;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return sortConfig.direction === "ascending" ? 1 : -1;
+      }
+    }
+    return 0;
+  });
+
+  const filteredData =
+    sortedData.filter(
+      (row) =>
+        row.nome.toLowerCase().includes(searchTerm.toLowerCase()) || row.cargo.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+  const onColumnClick = (key) => {
+    let direction = "ascending";
+
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
 
   return (
     <div className="container">
@@ -23,10 +51,10 @@ function App() {
         setSearchTerm={setSearchTerm}
       />
       <table>
-        <TableHeader />
+        <TableHeader onColumnClick={onColumnClick} />
         <tbody>
           {
-            data.map((row, index) => (
+            filteredData.map((row, index) => (
               <TableRow key={index} row={row} />
             ))
           }
