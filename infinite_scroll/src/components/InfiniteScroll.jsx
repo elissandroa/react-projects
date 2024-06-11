@@ -6,7 +6,7 @@ import axios from 'axios'
 
 export const InfiniteScroll = () => {
     const [post, setPost] = useState([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMoreDate, setHasMoreData] = useState(true);
 
@@ -37,13 +37,34 @@ export const InfiniteScroll = () => {
         fetchPosts();
     }, [page]);
 
+
+
+    const handleScroll = () => {
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100 &&
+            !isLoading &&
+            hasMoreDate) {
+            setPage((prevPage) => prevPage + 1);
+        }
+    }
+
+    useEffect(() => {
+        const throttleHandleScroll = throttle(handleScroll, 150);
+        window.addEventListener("scroll", throttleHandleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", throttleHandleScroll);
+        }
+
+    }, [hasMoreDate, isLoading])
+
+
     return (
         <div>
             <h1>Infinite Scroll</h1>
             <ul>
                 {
                     post.map((post) => (
-                        <li key={post.id}>
+                        <li key={Math.random() * 1000}>
                             <h3>{post.title}</h3>
                             <p>{post.body}</p>
                         </li>
@@ -53,4 +74,15 @@ export const InfiniteScroll = () => {
             {isLoading && <p>Carregando mais posts...</p>}
         </div>
     )
+}
+
+function throttle(func, delay) {
+    let lastCall = 0;
+
+    return function (...args) {
+        const now = new Date().getTime();
+        if (now - lastCall < delay) return;
+        lastCall = now;
+        return func(...args);
+    };
 }
