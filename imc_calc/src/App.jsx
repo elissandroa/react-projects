@@ -1,3 +1,4 @@
+import './App.css'
 import { ImcCalc } from "./components/ImcCalc"
 
 function App() {
