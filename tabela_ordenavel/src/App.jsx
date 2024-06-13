@@ -13,7 +13,7 @@ function App() {
     { nome: "Sofia", idade: 28, cargo: "Analista" },
   ]);
 
-  const [searchTerm, setSearchTerm] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState("");
 
   const sortedData = [...data].sort((a, b) => {

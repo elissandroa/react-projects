@@ -2,11 +2,11 @@ import { useState } from "react";
 import { TaxForm } from "./components/TaxForm"
 import { TaxReport } from "./components/TaxReport"
 import { Container, Typography } from '@mui/material';
-import { validateYupSchema } from "formik";
+
 
 function App() {
 
-  const [taxData, setTaxData] = useState(null);
+  const [taxData, setTaxData] = useState();
 
   const calculateTax = (value) => {
     let tax = 0;

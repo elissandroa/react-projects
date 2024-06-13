@@ -13,10 +13,13 @@ export const TaxReport = ({ taxData }) => {
           currency: "BRL",
         })}
       </Typography>
-      <Typography variant="body1">Imposto a pagar:  {parseFloat(taxData.tax).toLocaleString("pt-BR", {
+      <Typography variant="body1">
+        Imposto a pagar:{" "}
+        {parseFloat(taxData.tax).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
-        })} </Typography>
+        })}{" "}
+      </Typography>
     </Container>
   );
 };
