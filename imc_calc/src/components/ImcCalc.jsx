@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button } from './Button'
 import './ImcCalc.css'
 
-export const ImcCalc = () => {
+export const ImcCalc = ({ calcImc }) => {
     const [heigth, setHeigth] = useState("");
     const [weight, setWeight] = useState("");
 
@@ -56,8 +56,8 @@ export const ImcCalc = () => {
                     </div>
                 </div>
                 <div className="action-controls">
-                    <Button id='calc-btn' text='Calcular' />
-                    <Button clearForm={clearForm} id='clear-btn' text='Limpar' />
+                    <Button action={calcImc} id='calc-btn' text='Calcular' />
+                    <Button action={clearForm} id='clear-btn' text='Limpar' />
                 </div>
             </form>
         </div>

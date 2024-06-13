@@ -1,7 +1,7 @@
 import './Button.css'
 
-export const Button = ({clearForm, text, id}) => {
+export const Button = ({action, text, id}) => {
   return (
-    <button onClick={clearForm} id={id}>{text}</button>
+    <button onClick={action} id={id}>{text}</button>
   )
 }
