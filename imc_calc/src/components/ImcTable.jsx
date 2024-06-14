@@ -4,7 +4,7 @@ import './ImcTable.css';
 
 export const ImcTable = ({ data }) => {
   return (
-    <div className='result-container'>
+    <div id='result-container'>
       <p id="imc-number">Seu Imc:</p>
       <p id="imc-info">Situação Atual</p>
       <h3>Confira as classificações:</h3>
