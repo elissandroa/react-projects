@@ -6,6 +6,13 @@ import { ImcTable } from './components/ImcTable';
 
 function App() {
 
+  const resetCalc = (e) => {
+    e.preventDefault();
+    setImc("");
+    setInfo("");
+    setInfoClass("");
+  }
+
   const calcImc = (e, weight, heigth) => {
     e.preventDefault();
 
@@ -15,6 +22,15 @@ function App() {
     const heigthFloat = +heigth.replace(",", ".");
     const imcResult = (weightFloat / (heigthFloat * heigthFloat)).toFixed(1);
     setImc(imcResult);
+
+    data.forEach((item) => {
+      if(imcResult >= item.min && imcResult <= item.max){
+        setInfo(item.info);
+        setInfoClass(item.infoClass);
+      }
+    })
+
+    if(!info) return;
 
 
   }
@@ -27,7 +43,7 @@ function App() {
 
   return (
     <div className="container">
-      {!imc ? <ImcCalc calcImc={calcImc} /> : <ImcTable data={data} />}
+      {!imc ? <ImcCalc calcImc={calcImc} /> : <ImcTable data={data} imc={imc} info={info} infoClass={infoClass} resetCalc={resetCalc} />}
     </div>
   )
 }
