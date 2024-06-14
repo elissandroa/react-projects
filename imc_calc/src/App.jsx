@@ -6,19 +6,16 @@ import { ImcTable } from './components/ImcTable';
 
 function App() {
 
-  const calcImc = (e,  weight, heigth) => {
+  const calcImc = (e, weight, heigth) => {
     e.preventDefault();
 
     if (!weight || !heigth) return;
 
     const weightFloat = +weight.replace(",", ".");
     const heigthFloat = +heigth.replace(",", ".");
-    console.log(weightFloat);
-    console.log(heigthFloat);
-    let imcResult = 0;
-    imcResult = (weightFloat / (heigthFloat * heigthFloat)).toFixed(1);
+    const imcResult = (weightFloat / (heigthFloat * heigthFloat)).toFixed(1);
     setImc(imcResult);
-    
+
 
   }
 
@@ -30,7 +27,7 @@ function App() {
 
   return (
     <div className="container">
-      {!imc ? <ImcCalc calcImc={calcImc} /> : <ImcTable />}
+      {!imc ? <ImcCalc calcImc={calcImc} /> : <ImcTable data={data} />}
     </div>
   )
 }
