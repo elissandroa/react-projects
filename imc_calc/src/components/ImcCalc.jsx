@@ -36,7 +36,7 @@ export const ImcCalc = ({ calcImc }) => {
                         <label htmlFor="heigth">Altura:</label>
                         <input
                             type="text"
-                            name='height'
+                            name='heigth'
                             id='heigth'
                             placeholder='Exemplo 1,75'
                             value={heigth}
@@ -56,7 +56,7 @@ export const ImcCalc = ({ calcImc }) => {
                     </div>
                 </div>
                 <div className="action-controls">
-                    <Button action={calcImc} id='calc-btn' text='Calcular' />
+                    <Button action={(e) => calcImc(e, weight, heigth)} id='calc-btn' text='Calcular' />
                     <Button action={clearForm} id='clear-btn' text='Limpar' />
                 </div>
             </form>
