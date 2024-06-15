@@ -21,8 +21,14 @@ export const Home = () => {
     getPosts();
   }, [])
   return (
-    <div>{posts.map((post) => (
-      <h1>{post.title}</h1>
-    ))}</div>
+    <h1>{posts.length === 0 ? "Carregando..." : (
+      posts.map((post) => (
+        <div className="post" key={post.id}>
+          <h2>{post.title}</h2>
+          <p>{post.body}</p>
+          <Link to={`/posts/${post.id}`} className='btn'>Ler mais</Link>
+        </div>
+      ))
+    )} </h1>
   )
 }
