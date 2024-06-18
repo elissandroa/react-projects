@@ -5,6 +5,7 @@ import { NewPost } from './pages/NewPost';
 import { Navbar } from './components/Navbar';
 import { Post } from './pages/Post';
 import { Admin } from './pages/Admin';
+import { EditPost } from './pages/EditPost';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/new' element={<NewPost />} />
           <Route path='/posts/:id' element={<Post />} />
+          <Route path='/posts/edit/:id' element={<EditPost />} />
           <Route path='/admin' element={<Admin />} />
         </Routes>
       </BrowserRouter>

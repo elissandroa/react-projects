@@ -1,11 +1,12 @@
 import './styles.css'
 import { blogFetch } from '../../axios/config'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 
 export const Admin = () => {
     const [posts, setPosts] = useState([]);
+    const { id } = useParams();
 
     const getPosts = async () => {
         try {
@@ -15,6 +16,13 @@ export const Admin = () => {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const deletePost = async (id) => {
+
+        await blogFetch.delete(`posts/${id}`);
+        const filteredPost = posts.filter((post) => post.id != id);
+        setPosts(filteredPost);
     }
 
     useEffect(() => {
@@ -32,8 +40,8 @@ export const Admin = () => {
                 <div className="post" key={post.id}>
                     <h2>{post.title}</h2>
                     <div className="actions">
-                        <Link className='btn edit-btn'>Editar</Link>
-                        <button className="btn delete-btn">Excluir</button>
+                        <Link to={`/posts/edit/${post.id}`} className='btn edit-btn'>Editar</Link>
+                        <button className="btn delete-btn"  onClick={() => deletePost(post.id)}>Excluir</button>
                     </div>
                 </div>
             ))}
