@@ -7,7 +7,14 @@ import {
 } from 'react-icons/bs'
 import './Thanks.css'
 
-export const Thanks = () => {
+export const Thanks = ({ data }) => {
+  const emojiData = {
+    unsatisfied: <BsFillEmojiFrownFill />,
+    neutral: <BsFillEmojiNeutralFill />,
+    satisfied: <BsFillEmojiSmileFill />,
+    very_satisfied: <BsFillEmojiHeartEyesFill />,
+
+  }
   return (
     <div className="thanks-container">
       <h2>Falta pouco...</h2>
@@ -17,12 +24,14 @@ export const Thanks = () => {
       <p>
         Para concluir sua avaliação clique no botão de enviar a baixo.
       </p>
-      <h3>Aqui está o resumo da sua avaliação:</h3>
+      <h3>Aqui está o resumo da sua avaliação {data.name}:</h3>
       <p className="review-data">
         <span>Satisfação com o produto:</span>
+        {emojiData[data.review]}
       </p>
       <p className="review-data">
         <span>Comentário:</span>
+        {data.comment}
       </p>
     </div>
   )
