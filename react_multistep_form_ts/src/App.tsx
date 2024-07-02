@@ -9,6 +9,7 @@ import { useForm } from './hooks/useForm'
 
 //CSS
 import './App.css'
+import { Steps } from './components/Steps'
 
 function App() {
 
@@ -29,7 +30,7 @@ function App() {
         </p>
       </div>
       <div className="form-container">
-        <p>Passos</p>
+        <Steps currentStep={currentStep} />
         <form onSubmit={(e) => changeStep(currentStep + 1, e)}>
           <div className="inputs-container">
             {currentComponent}
