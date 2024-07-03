@@ -10,16 +10,43 @@ import { useForm } from './hooks/useForm'
 //CSS
 import './App.css'
 import { Steps } from './components/Steps'
+import { useState } from 'react'
+
+type formFields = {
+  name: string,
+  email: string,
+  review: string,
+  comment: string
+}
+
+
+const formTemplate: formFields = {
+  name: "",
+  email: "",
+  review: "",
+  comment: ""
+}
 
 function App() {
 
+  const [data, setData] = useState(formTemplate);
+
+  const updateFieldHandler = (key: string, value: string) => {
+    setData((prev) => {
+      return {...prev, [key]:value}
+    })
+  }
+
   const formComponents = [
-    <UserForm />,
+    <UserForm data={data}  updateFieldHandler={updateFieldHandler}/>,
     <ReviewForm />,
     <Thanks />,
   ]
 
-  const {currentStep, currentComponent, changeStep  } = useForm(formComponents);
+  const { currentStep, currentComponent, changeStep } = useForm(formComponents);
+
+
+
 
   return (
     <div className='app'>
@@ -36,7 +63,7 @@ function App() {
             {currentComponent}
           </div>
           <div className="actions">
-            <button type='button' onClick={() => changeStep(currentStep -1)}>
+            <button type='button' onClick={() => changeStep(currentStep - 1)}>
               <GrFormPrevious />
               <span>Voltar</span>
             </button>
