@@ -8,8 +8,7 @@ type stepsProps = {
 }
 
 export const Steps = ({ currentStep }: stepsProps) => {
-  console.log(currentStep);
-  return (
+   return (
     <div className="steps">
       <div className="step active">
         <AiOutlineUser />
