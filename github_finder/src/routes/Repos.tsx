@@ -19,7 +19,11 @@ export const Repos = () => {
             const res = await fetch(`https://api.github.com/users/${username}/repos`);
             const data = await res.json();
 
-            setRepos(data);
+            let orderedRepos = data.sort((a:RepoProps, b:RepoProps) => b.stargazers_count - a.stargazers_count);
+
+            orderedRepos = orderedRepos.slice(0, 5);
+
+            setRepos(orderedRepos);
         }
         if (username) {
             loadRepos(username);
