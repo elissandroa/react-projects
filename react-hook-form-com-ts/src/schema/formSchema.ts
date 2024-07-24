@@ -18,4 +18,4 @@ export const formSchema = z.object({
     path: ["confirmPassword"],
 });
 
-export type FormSchema = z.infer<typeof formSchema>;
+export type FormSchema = z.infer<typeof formSchema>
