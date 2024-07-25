@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Card = () => {
+export const Card = ({card}) => {
   return (
-    <div className='card'>
-        <h3>Card</h3>
+    <div className={`card ${card.isFlipped ? "flipped" : ""}`}>
+        {card.value}
     </div>
   )
 }

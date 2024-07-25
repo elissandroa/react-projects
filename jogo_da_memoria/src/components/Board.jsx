@@ -1,11 +1,12 @@
 import React from 'react'
 import { Card } from './Card'
 
-export const Board = () => {
+export const Board = ({cards}) => {
     return (
         <div className='board'>
-            <h3>Board</h3>
-            <Card />
+            {cards.map((card) => (
+                <Card key={card.id} card={card} />
+            ))}
         </div>
     )
 }

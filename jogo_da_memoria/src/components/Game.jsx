@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Board } from './Board'
+import { Card } from './Card';
 
 export const Game = () => {
     const shufleArray = (array) => {
@@ -19,7 +20,7 @@ export const Game = () => {
             isFlipped: false,
         }));
         const duplicateCards = cards.concat([...cards]).map((card, index) => ({ ...card, index }));
-        console.log(shufleArray(duplicateCards));
+        return shufleArray(duplicateCards);
 
     }
 
@@ -28,10 +29,14 @@ export const Game = () => {
     const [flippedCards, setFlippedCards] = useState([]);
     const [chances, setChances] = useState(6);
 
+    const result = cards.filter((card) => card.isFlipped).length;
+
     return (
         <div className='game'>
             <h3>Game</h3>
-            <Board />
+            <Board cards={cards} />
+            {chances === 0 ? (<p>Suas tentativas acabaram</p>) : (result === cards.length) ? (<h2>Parabéns você ganhou!</h2>) : (<p>você possui {chances} tentativa(s)</p>)}
+            <button className='btn'>Reiniciar</button>
         </div>
     )
 }
